@@ -1,4 +1,4 @@
-ALTER FUNCTION dbo.fn_getfirstname( @str NVARCHAR(4000) )
+CREATE FUNCTION dbo.fn_getfirstname( @str NVARCHAR(4000) )
 RETURNS NVARCHAR(2000)
 AS
 BEGIN
@@ -15,14 +15,12 @@ END
 GO
 
 DECLARE @empname VARCHAR(50)
-SET @empname = 'H.T.S SAMA'
---SET @empname = 'k.Kiribathgodage Don Jayan Prabodha'
-
-
+SET @empname = 'Michael Dennis Stocks'
 
 SELECT  @empname AS full_name, 
-REVERSE(LEFT( REVERSE(@empname), CHARINDEX(' ', REVERSE(@empname))-1 )),
-left(@empname,len(@empname)+1-charindex(' ',reverse(@empname))),
+left(@empname,len(@empname)+1-charindex(' ',reverse(@empname))) as initals,
+REVERSE(LEFT( REVERSE(@empname), CHARINDEX(' ', REVERSE(@empname))-1 )) as last_name,
 dbo.fn_getfirstname(left(@empname,len(@empname)+1-charindex(' ',reverse(@empname))))+' '+
-REVERSE(LEFT( REVERSE(@empname), CHARINDEX(' ', REVERSE(@empname))-1 )) as initals
+REVERSE(LEFT( REVERSE(@empname), CHARINDEX(' ', REVERSE(@empname))-1 )) as initals_last_name
+
 
